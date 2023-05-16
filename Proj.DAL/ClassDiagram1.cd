@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Proj.DAL.Models.Cart">
+    <Position X="2" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAAAAgQAAAAAAAAAABAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Cart.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Proj.DAL.Models.CartItem">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAEAAAQCAAAAAAAAAEAAAAAgAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Models\CartItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Proj.DAL.Models.Developer">
+    <Position X="3.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QIACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Developer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Proj.DAL.Models.Game">
+    <Position X="8.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAgQAIAAAAgAIAAAQAgMAAAAEACAAAAAAAAAA=</HashCode>
+      <FileName>Models\Game.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Proj.DAL.Models.Genre">
+    <Position X="0.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Genre.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Proj.DAL.Models.PayMethod">
+    <Position X="2.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\PayMethod.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Proj.DAL.Models.Platform">
+    <Position X="6.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Platform.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Proj.DAL.Models.Shipping">
+    <Position X="10.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAQAAAAAAAAAAJAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Shipping.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Proj.DAL.Models.User">
+    <Position X="4.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAACAAAAAAAQAACAAAAAAAAAECAAAAAAAAAAA=</HashCode>
+      <FileName>Models\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Proj.DAL.Models.UserPayment">
+    <Position X="6.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAAAAAAAAAAAAAAAgBAkAAAAAABAACAAAAAAAAAA=</HashCode>
+      <FileName>Models\UserPayment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

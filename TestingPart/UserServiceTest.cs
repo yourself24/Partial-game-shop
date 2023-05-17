@@ -1,28 +1,56 @@
-using Proj.BLL.Services;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using Proj.DAL.Models;
+using Proj.DAL.Repos.Contracts;
+using Xunit;
 
-namespace TestingPart
+namespace Proj.BLL.Services.Tests
 {
-    [TestClass]
-    public class UserServiceTest
+    public class UserServiceTests
     {
-        [TestMethod]
-        public async Task CreateUser_ValidUser_ReturnsTrue(Task result)
+        [Fact]
+        public async Task CreateUser_ValidUser_ShouldCallCreateItem()
         {
             // Arrange
-            var userService = new UserService(/* mock dependencies */);
-            var user = new User();
-            user.Username = "username";
-            user.Password = "password";
-            user.Email = "email";
-            user.Address = "address";
-            user.Id = 244;
+            var mockRepo = new Mock<IGenericRepo<User>>();
+            var mockAccountCreationObservable = new Mock<IAccountCreationObservable>();
+
+            var userService = new UserService(mockRepo.Object, mockAccountCreationObservable.Object);
+
+            var user = new User
+            {
+                Username = "test",
+                Password = "password",
+                Email = "test@example.com"
+            };
 
             // Act
             await userService.CreateUser(user);
-            
+
             // Assert
+            mockRepo.Verify(repo => repo.CreateItem(user), Times.Once);
+        }
+        [Fact]
+        public void LoginUser_ValidCredentials_ShouldReturnTrue()
+        {
+            // Arrange
+            var mockRepo = new Mock<IGenericRepo<User>>();
+            var mockAccountCreationObservable = new Mock<IAccountCreationObservable>();
+
+            var userService = new UserService(mockRepo.Object, mockAccountCreationObservable.Object);
+
+
+            mockRepo.Setup(repo => repo.FindUser(It.IsAny<string>())).Returns(new User
+            {
+                Username = "test",
+                Password = BCrypt.Net.BCrypt.HashPassword("password"),
+                Email = "test@example.com"
+            });
+
+            // Act
+            var result = userService.LoginUser("test", "password");
+
+            // Assert
+            Assert.True(result);
         }
     }
 }

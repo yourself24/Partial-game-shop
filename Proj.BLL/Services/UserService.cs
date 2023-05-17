@@ -82,7 +82,7 @@ namespace Proj.BLL.Services
             try
             {
                 await _userRepo.CreateItem(user);
-                //_accountCreationObservable.NotifyObservers(user);
+                _accountCreationObservable.NotifyObservers(user);
             }
             catch
             {

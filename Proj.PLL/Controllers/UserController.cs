@@ -101,7 +101,9 @@ namespace Proj.PLL.Controllers
             {
                 return NotFound();
             }
-            return View(user);
+            //return View(user);
+            return RedirectToAction(nameof(Index));
+
         }
 
         // POST: User/Edit/5

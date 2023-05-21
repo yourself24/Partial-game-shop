@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Admin Home Page";
+}
+@{
+    Layout = "_LayoutAdmin";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome Admin! Check the navigation bar for available options!</h1>
+</div>
+
+<div class="container mt-4">
+    <h2>Create Promotion for Developer</h2>
+    <form method="post" action="/Admin/CreatePromotion">
+        <div class="form-group">
+            <label for="developerName">Developer Name</label>
+            <input type="text" class="form-control" id="developerName" name="developerName" placeholder="Enter developer name" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Create Promotion</button>
+    </form>
+</div>

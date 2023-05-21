@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Proj.BLL.Services.Contracts;
+using Proj.BLL.Services.Proj.BLL.Services;
 using Proj.DAL.DataContext;
 using Proj.DAL.Models;
 
@@ -15,11 +16,15 @@ namespace Proj.PLL.Controllers
     {
         private readonly VshopContext _context;
         private readonly IAdminService _adminService;
+        private readonly IDeveloperService _devService;
+        private readonly IGameService _gameService;
 
-        public AdminController(VshopContext context,IAdminService adminService)
+        public AdminController(VshopContext context,IAdminService adminService, IDeveloperService developerService,IGameService gameService)
         {
             _context = context;
             _adminService = adminService;
+            _devService = developerService;
+            _gameService = gameService;
         }
 
         // GET: Admin
@@ -68,6 +73,46 @@ namespace Proj.PLL.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(admin);
+        }
+
+        public IActionResult IndexAdmin() { return View(); }
+
+        [HttpPost]
+        public async Task<IActionResult> CreatePromotion(string developerName)
+        {
+            var dev = _devService.GetDevByName(developerName);
+            int id = dev.Id;
+            
+            Console.WriteLine(dev.Name);
+            try
+            {
+                var games = await _gameService.ReadGames2();
+                while(await games.HasNextAsync())
+                {
+                    var game = await games.NextAsync();
+                    if (game.Developer == id)
+                    {
+                        if(game.Price <= 20)
+                        {
+                            game.Price -= 7;
+                        }
+                        else if (game.Price >20 && game.Price<= 40)
+                        {
+                            game.Price -= 15;
+                        }
+                        else
+                        {
+                            game.Price -= 20;
+                        }
+                        await _gameService.UpdateGame(game.Id,game.Name,game.Genre,game.Developer,game.Platform,game.Price,game.ReleaseDate,game.Stock);
+                    }
+                }
+            }
+            catch
+            {
+                throw;
+            }
+            return RedirectToAction("IndexAdmin");
         }
 
         // GET: Admin/Edit/5

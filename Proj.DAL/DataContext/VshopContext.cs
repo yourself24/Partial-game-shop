@@ -37,6 +37,8 @@ public partial class VshopContext : DbContext
     public virtual DbSet<Shipping> Shippings { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
+    public virtual DbSet<GameArt> GameArts { get; set; }
+
 
     public virtual DbSet<UserPayment> UserPayments { get; set; }
 
@@ -113,8 +115,32 @@ public partial class VshopContext : DbContext
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("carts_user_id_fkey");
+
         });
 
+        modelBuilder.Entity<GameArt>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("game_art_pkey");
+
+            entity.ToTable("game_art");
+
+            entity.HasIndex(e => e.Gameid, "game_art_gameid_key").IsUnique();
+
+            entity.Property(e => e.Id)
+                .ValueGeneratedNever()
+                .HasColumnName("id");
+            entity.Property(e => e.Description)
+                .HasColumnType("character varying")
+                .HasColumnName("description");
+            entity.Property(e => e.Gameid).HasColumnName("gameid");
+            entity.Property(e => e.Url)
+                .HasColumnType("character varying")
+                .HasColumnName("url");
+
+            entity.HasOne(d => d.Game).WithOne(p => p.GameArt)
+                .HasForeignKey<GameArt>(d => d.Gameid)
+                .HasConstraintName("game_art_gameid_fkey");
+        });
         modelBuilder.Entity<CartItem>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("cart_items_pkey");
@@ -277,6 +303,8 @@ public partial class VshopContext : DbContext
             entity.Property(e => e.Username)
                 .HasColumnType("character varying")
                 .HasColumnName("username");
+            entity.Property(e => e.Purchases)
+            .HasColumnName("purchases");
         });
 
         modelBuilder.Entity<UserPayment>(entity =>

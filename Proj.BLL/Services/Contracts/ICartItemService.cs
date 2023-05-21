@@ -11,6 +11,8 @@ namespace Proj.BLL.Services
         Task<List<CartItem>> ReadCartItems();
         Task<CartItem> ReadOneCartItem(int id);
         Task UpdateCartItem(CartItem item);
-      
+        Task<ItemIterator> ReadItems2();
+
+
     }
 }

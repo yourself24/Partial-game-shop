@@ -132,7 +132,7 @@ namespace Proj.BLL.Services
 
 
 
-        public async Task UpdateUser(int id, string username, string password, string email, string address)
+        public async Task UpdateUser(int id, string username, string password, string email, string address,int purchaes)
         {
           
                 var user = await _userRepo.GetById(id);
@@ -140,13 +140,14 @@ namespace Proj.BLL.Services
                 {
                     throw new ArgumentException("No user with this id was found!");
                 }
-                if (id != null && username != null && password != null && email != null && address != null)
+                if (id != null && username != null && password != null && email != null && address != null && purchaes!=null)
                 {
                     user.Id = id;
                     user.Username = username;
                 user.Password = BCrypt.Net.BCrypt.HashPassword(password);
                 user.Email = email;
                 user.Address = address;
+                user.Purchases = purchaes;
                 }
                 await _userRepo.UpdateItem(user);
 

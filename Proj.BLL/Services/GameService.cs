@@ -87,6 +87,12 @@ namespace Proj.BLL.Services
                 }
                 await _gameRepo.UpdateItem(game);
             }
+
+            public async Task<GameIterator> ReadGames2()
+            {
+               var games = await _gameRepo.GetAll();
+                return new GameIterator(games);
+            }
         }
     }
 

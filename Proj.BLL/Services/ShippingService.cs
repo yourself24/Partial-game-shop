@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Proj.BLL.Services
 {
-    public class ShippingService : IGenericService<Shipping>
+    public class ShippingService : IShippingService
     {
         private readonly IGenericRepo<Shipping> _shipRepo;
 

@@ -56,5 +56,10 @@ namespace Proj.DAL.Repos.Contracts
         {
             return _context.Admins.FirstOrDefault(admin => admin.Email == name);
         }
+
+        public Developer FindDeveloper(string name)
+        {
+            return _context.Developers.FirstOrDefault(dev => dev.Name == name);
+        }
     }
 }

@@ -17,7 +17,7 @@ namespace Proj.BLL.Services.Contracts
 
         Task DeleteUser(int id);
 
-        Task UpdateUser(int id,string username,string password,string email,string address);
+        Task UpdateUser(int id,string username,string password,string email,string address,int purchaes);
 
         bool LoginUser(string username, string password);
         IEnumerable<User> GetUsersWithShorterUsernames(int length);

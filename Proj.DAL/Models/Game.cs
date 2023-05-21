@@ -28,4 +28,6 @@ public partial class Game
     public virtual Genre? GenreNavigation { get; set; }
 
     public virtual Platform? PlatformNavigation { get; set; }
+    public virtual GameArt? GameArt { get; set; }
+
 }

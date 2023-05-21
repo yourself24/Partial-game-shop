@@ -85,6 +85,18 @@ namespace Proj.BLL.Services
             }
             await _devRepo.UpdateItem(dev);
         }
+
+        public  Developer GetDevByName(string name)
+        {
+            try
+            {
+               return _devRepo.FindDeveloper(name);
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }
         

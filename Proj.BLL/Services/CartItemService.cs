@@ -92,5 +92,11 @@ namespace Proj.BLL.Services
                 await _cartItemRepo.UpdateItem(item);
             }
         }
+
+        public async Task<ItemIterator> ReadItems2()
+        {
+            var items =  await _cartItemRepo.GetAll();
+            return new ItemIterator(items);
+        }
     }
 }

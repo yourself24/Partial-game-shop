@@ -26,6 +26,8 @@ namespace Proj.DAL.Repos.Contracts
 
         Admin FindByString(string name);
 
+        Developer FindDeveloper(string name);
+
 
     }
 }

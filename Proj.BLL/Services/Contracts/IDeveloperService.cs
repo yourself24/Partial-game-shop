@@ -18,5 +18,7 @@ namespace Proj.BLL.Services.Contracts
         Task<Developer> GetDev(int id);
     
         Task UpdateDev(Developer dev);
+
+        Developer GetDevByName(string name);
     }
 }

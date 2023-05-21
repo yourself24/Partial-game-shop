@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proj.BLL", "Proj.BLL\Proj.B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proj.PLL", "Proj.PLL\Proj.PLL.csproj", "{C7F21EA3-4812-4697-9228-B59936BF66F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestingPart", "TestingPart\TestingPart.csproj", "{939ED542-DE03-493A-B20A-398CF85223C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestingPart", "TestingPart\TestingPart.csproj", "{939ED542-DE03-493A-B20A-398CF85223C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -14,5 +14,7 @@ namespace Proj.BLL.Services.Contracts
         Task<Game> ReadOneGame(int id);
         Task<List<Game>> ReadGames();
         Task UpdateGame(int id, string name, int? genreId, int? developerId, int? platformId,decimal? price, DateOnly releaseDate, int? stock);
+        Task<GameIterator> ReadGames2();
     }
+
 }

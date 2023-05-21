@@ -16,7 +16,7 @@ namespace Proj.PLL.Controllers
         private readonly VshopContext _context;
         private readonly IUserService _userService;
 
-        public UserController(VshopContext context,IUserService userService)
+        public UserController(VshopContext context, IUserService userService)
         {
             _context = context;
             _userService = userService;
@@ -27,19 +27,19 @@ namespace Proj.PLL.Controllers
         {
             try { 
             var users = await _userService.ReadUsers2();
-                while(await users.HasNextAsync())
+            while (await users.HasNextAsync())
+            {
+                var user = await users.NextAsync();
+                if (user.Username.Length < 5)
                 {
-                   var user = await users.NextAsync();
-                    if (user.Username.Length < 5)
-                    {
-                       Console.WriteLine($"!!!User {user.Username} is a bit short. They should be advised to change it!!!");
-                    }
+                    Console.WriteLine($"!!!User {user.Username} is a bit short. They should be advised to change it!!!");
                 }
-                
-                return _context.Users != null ?
-                            View(await _context.Users.ToListAsync()) :
-                            Problem("Entity set 'VshopContext.Users'  is null.");
             }
+
+            return _context.Users != null ?
+                        View(await _context.Users.ToListAsync()) :
+                        Problem("Entity set 'VshopContext.Users'  is null.");
+        }
             catch
             {
                 throw;
@@ -75,15 +75,14 @@ namespace Proj.PLL.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Username,Password,Email,Address")] User user)
+        public async Task<IActionResult> Create([Bind("Id,Username,Password,Email,Address,Purchases")] User user)
         {
             if (ModelState.IsValid)
             {
-
                 string hashedPassword = BCrypt.Net.BCrypt.HashPassword(user.Password);
                 user.Password = hashedPassword;
                 await _userService.CreateUser(user);
-                
+
             }
             return View(user);
         }
@@ -101,9 +100,7 @@ namespace Proj.PLL.Controllers
             {
                 return NotFound();
             }
-            //return View(user);
-            return RedirectToAction(nameof(Index));
-
+            return View(user);
         }
 
         // POST: User/Edit/5
@@ -111,7 +108,7 @@ namespace Proj.PLL.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Username,Password,Email,Address")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Username,Password,Email,Address,Purchases")] User user)
         {
             if (id != user.Id)
             {
@@ -123,8 +120,7 @@ namespace Proj.PLL.Controllers
                 try
                 {
                     user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
-                    await _userService.UpdateUser(user.Id, user.Username, user.Password,user.Email,user.Address);
-                   
+                    await _userService.UpdateUser(user.Id, user.Username, user.Password, user.Email, user.Address,user.Purchases);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -174,7 +170,7 @@ namespace Proj.PLL.Controllers
             {
                 _userService.DeleteUser(user.Id);
             }
-            
+
             return RedirectToAction(nameof(Index));
         }
 

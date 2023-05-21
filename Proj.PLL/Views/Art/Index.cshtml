@@ -1,0 +1,26 @@
+@model IEnumerable<Proj.DAL.Models.GameArt>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_Layout";
+}
+
+<h1>Game Catalog</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Game</th>
+            <th>Image</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var gameArt in Model)
+        {
+            <tr>
+                <td>@gameArt.Game.Name</td>
+                <td><img src="@gameArt.Url" alt="Game Image" /></td>
+            </tr>
+        }
+    </tbody>
+</table>

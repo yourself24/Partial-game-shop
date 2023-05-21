@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Proj.BLL.Services.Contracts;
 using Proj.DAL.DataContext;
 using Proj.DAL.Models;
 
@@ -13,17 +14,22 @@ namespace Proj.PLL.Controllers
     public class ItemController : Controller
     {
         private readonly VshopContext _context;
+        private readonly IGameService _gameService;
 
-        public ItemController(VshopContext context)
+        public ItemController(VshopContext context,IGameService gameService)
         {
             _context = context;
+            _gameService = gameService;
         }
 
         // GET: Item
         public async Task<IActionResult> Index()
         {
             var vshopContext = _context.CartItems.Include(c => c.CartNavigation).Include(c => c.GameNavigation);
+            var userId = HttpContext.Session.GetInt32("UserId");
+            Console.WriteLine("User ID: " + userId);
             return View(await vshopContext.ToListAsync());
+            
         }
 
         // GET: Item/Details/5
@@ -63,6 +69,15 @@ namespace Proj.PLL.Controllers
         {
             if (ModelState.IsValid)
             {
+
+                var game  = await _gameService.ReadOneGame(cartItem.Game.Value);
+                if(game.Stock < cartItem.Quantity)
+                {
+                    return Problem("Not enough stock");
+                }
+                game.Stock -= cartItem.Quantity;
+                cartItem.Price = game.Price*cartItem.Quantity;
+
                 _context.Add(cartItem);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
